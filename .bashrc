@@ -39,3 +39,5 @@ alias ...='cd ../..'
 # [[ ! ${BLE_VERSION-} ]] || ble-attach
 alias run-hyro-docker="/home/ielson/docker/hyro_docker/scripts/run.sh"
 alias kill-hyro-docker="docker compose -f /home/ielson/docker/hyro_docker/scripts/docker-compose.yml down"
+
+alias dotfiles='/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
