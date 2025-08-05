@@ -23,3 +23,17 @@ map("n", "<leader>w", "<CMD>update<CR>")
 
 -- quit
 map("n", "<leader>q", "<CMD>q<CR>")
+
+-- clangd
+-- Atalho manual para formatar com o clang-format
+map("n", "<leader>f", function()
+  vim.lsp.buf.format({ async = true, buffer = true})
+end, { desc = "LSP: Format buffer" })
+
+map("n", "gd", vim.lsp.buf.definition, { desc = "LSP: Go to definition" })
+map("n", "K",  vim.lsp.buf.hover,      { desc = "LSP: Hover" })
+map("n", "gr", vim.lsp.buf.references, { desc = "LSP: References" })
+map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "LSP: Rename" })
+map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP: Code Action" })
+
+
