@@ -1,0 +1,14 @@
+
+# Menos ruído de carregamento
+settings set target.process.stop-on-sharedlibrary-events false
+# Endereços estáveis em PIE
+settings set target.disable-aslr true
+# Evitar que breakpoint por linha caia em headers inline (opcional)
+# settings set target.inline-breakpoint-strategy never
+
+# Evitar “entrar” em libs/frameworks ao dar step-in (ajuda com Eigen, std, etc.)
+settings set target.process.thread.step-avoid-regexp '^(std::|Eigen::|boost::|ompl::|openvdb::)'
+
+
+command alias brf breakpoint set -f %1 -l %2
+command alias brn breakpoint set -n %1
