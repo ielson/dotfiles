@@ -4,11 +4,14 @@ settings set target.process.stop-on-sharedlibrary-events false
 # Endereços estáveis em PIE
 settings set target.disable-aslr true
 # Evitar que breakpoint por linha caia em headers inline (opcional)
-# settings set target.inline-breakpoint-strategy never
+settings set target.inline-breakpoint-strategy never
 
 # Evitar “entrar” em libs/frameworks ao dar step-in (ajuda com Eigen, std, etc.)
 settings set target.process.thread.step-avoid-regexp '^(std::|Eigen::|boost::|ompl::|openvdb::)'
 
+# Ignorar SIGPIPE: passar para o processo, não parar, não notificar. Necessário para o hyro, pois se não para direto por causa do mqtt
+# process handle -p true -s false -n false SIGPIPE
+command alias nosigpipe process handle SIGPIPE -p false -s false -n false
 
 command alias brf breakpoint set -f %1 -l %2
 command alias brn breakpoint set -n %1
