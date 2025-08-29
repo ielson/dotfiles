@@ -19,6 +19,24 @@ return {
         --    vim.lsp.buf.format({ async = false })
          -- end,
        -- })
+      lspconfig.basedpyright.setup{
+        settings = {
+          basedpyright = {
+            -- a PASTA onde ficam os envs do mamba/conda:
+            venvPath = "/home/ielson/docker/conda/.local/share/mamba/envs",
+            -- o NOME do env:
+            venv = "deploy19-env",
+            pythonVersion = "3.10",
+            analysis = {
+              typeCheckingMode = "basic",
+              diagnosticMode = "workspace",
+              extraPaths = {
+                    "/home/ielson/docker/conda/.local/share/mamba/envs/deploy19-env/lib/python3.10/site-packages",
+                  },
+            },
+          },
+        },
+      }
 
       lspconfig.clangd.setup{
         capabilities = capabilities,
