@@ -64,3 +64,26 @@ vim.api.nvim_set_keymap('n', '<leader>f', ':Files<CR>', opts)
 --vim.api.nvim_set_keymap('n', '<leader>c', ':Commits<CR>', opts)
 --vim.api.nvim_set_keymap('n', '<leader>C', ':BCommits<CR>', opts)
 
+
+-- mapeamentos para o gitsigns
+-- se estiver no modo de diff, usa o padrao do vim, se nao, chama git singgs
+-- c vem de change
+map('n', ']c', function()
+      if vim.wo.diff then
+        vim.cmd.normal({']c', bang = true})
+      else
+        require('gitsigns').nav_hunk('next')
+      end
+    end)
+
+    map('n', '[c', function()
+      if vim.wo.diff then
+        vim.cmd.normal({'[c', bang = true})
+      else
+        require('gitsigns').nav_hunk('prev')
+      end
+    end)
+
+    -- Actions
+    map('n', '<leader>hs', function() require('gitsigns').stage_hunk() end)
+    map('n', '<leader>hr', function() require('gitsigns').reset_hunk() end)
