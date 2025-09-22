@@ -87,3 +87,4 @@ map('n', ']c', function()
     -- Actions
     map('n', '<leader>hs', function() require('gitsigns').stage_hunk() end)
     map('n', '<leader>hr', function() require('gitsigns').reset_hunk() end)
+    map('n', '<leader>hp', function() require('gitsigns').preview_hunk_inline() end)
