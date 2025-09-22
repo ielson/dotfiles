@@ -5,7 +5,6 @@ return {
     "neovim/nvim-lspconfig",
     event = "BufReadPre",
     config = function()
-      local lspconfig = require("lspconfig")
 
       -- Capacidades para integrar com nvim-cmp (se instalado)
       local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -19,7 +18,7 @@ return {
         --    vim.lsp.buf.format({ async = false })
          -- end,
        -- })
-      lspconfig.basedpyright.setup{
+      vim.lsp.config("basedpyright", {
         settings = {
           basedpyright = {
             -- a PASTA onde ficam os envs do mamba/conda:
@@ -36,14 +35,26 @@ return {
             },
           },
         },
-      }
+      })
+      vim.lsp.enable("basedpyright")
 
-      lspconfig.clangd.setup{
+      vim.lsp.config("clangd", {
         capabilities = capabilities,
         cmd = { "clangd", "--background-index", "--clang-tidy" },
         -- Se seu compile_commands.json fica em build/:
         -- cmd = { "clangd", "--background-index", "--clang-tidy", "--compile-commands-dir=build" },
-      }
+      })
+      vim.lsp.enable("clangd")
+
+      vim.lsp.config("lua_ls", {
+        settings = {
+          Lua = {
+            diagnostics = {globals = {"vim"}}, 
+            workspace = {checkThirdParty = false},
+          },
+        },
+      })
+    vim.lsp.enable("lua_ls")
     end,
   }
 }
