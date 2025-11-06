@@ -13,6 +13,10 @@
 eval "$(fzf --bash)"
 
 # fzf preview options
+export FZF_DEFAULT_COMMAND="
+fd --type f --exclude .git --exclude .cache --follow --hidden"
+
+
 export FZF_CTRL_T_OPTS="
   --height 60% \
   --border \
@@ -20,6 +24,8 @@ export FZF_CTRL_T_OPTS="
   --preview 'bat --style=numbers --color=always --line-range :500 {}' \
   --preview-window='right:60%'  
 "
+export FZF_CTRL_T_COMMAND="
+$FZF_DEFAULT_COMMAND"
 
 # (Optionally) preview directory tree when using ALT-C
 export FZF_ALT_C_OPTS="
@@ -41,3 +47,5 @@ alias run-hyro-docker="/home/ielson/docker/hyro_docker/scripts/run.sh"
 alias kill-hyro-docker="docker compose -f /home/ielson/docker/hyro_docker/scripts/docker-compose.yml down"
 
 alias dotfiles='/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
+
+alias polar='docker exec -it -w /home/ielson/code/polarquest/ws noetic-dev bash'
