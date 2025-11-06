@@ -55,6 +55,12 @@ return {
         },
       })
     vim.lsp.enable("lua_ls")
+
+    vim.lsp.config("omnisharp", {
+     capabilities= capabilities,
+     -- cmd = {},
+    })
+    vim.lsp.enable("omnisharp")
     end,
   }
 }
