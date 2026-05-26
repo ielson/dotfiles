@@ -1,3 +1,7 @@
 [user]
-	name = Daniel Mascarenhas
-	email = daniel.mascarenhas@saipem.com
+	name = Dan Mascarenhas
+	email = danmascandrade@gmail.com
+[core]
+	editor = nvim
+[push]
+    autoSetupRemote = true
