@@ -88,3 +88,29 @@ map('n', ']c', function()
     map('n', '<leader>hs', function() require('gitsigns').stage_hunk() end)
     map('n', '<leader>hr', function() require('gitsigns').reset_hunk() end)
     map('n', '<leader>hp', function() require('gitsigns').preview_hunk_inline() end)
+
+-- Diffview toggle
+local function toggle_diffview(cmd)
+  local ok, lib = pcall(require, "diffview.lib")
+
+  if ok and lib.get_current_view() then
+    vim.cmd("DiffviewClose")
+  else
+    vim.cmd(cmd or "DiffviewOpen")
+  end
+end
+
+map("n", "<leader>dl", function()
+  toggle_diffview("DiffviewOpen")
+end, { desc = "Toggle Diffview" })
+
+map("n", "<leader>dc", function()
+  toggle_diffview("DiffviewOpen HEAD^!")
+end, { desc = "Toggle PR/current commit diff" })
+
+map("n", "<leader>db", function()
+  local base = vim.fn.input("Base branch: ", "master")
+  if base ~= "" then
+    toggle_diffview("DiffviewOpen " .. base .. "...HEAD")
+  end
+end, { desc = "Toggle branch diff" })
