@@ -115,3 +115,31 @@ map("n", "<leader>db", function()
     toggle_diffview("DiffviewOpen " .. base .. "...HEAD")
   end
 end, { desc = "Toggle branch diff" })
+
+-- toggleterm 
+local map = vim.keymap.set
+
+map("n", "<leader>tt", "<cmd>1ToggleTerm direction=float<CR>", {
+  desc = "terminal",
+})
+
+map("n", "<leader>th", "<cmd>1ToggleTerm size=15 direction=horizontal<CR>", {
+  desc = "terminal horizontal",
+})
+
+map("n", "<leader>tv", "<cmd>1ToggleTerm size=80 direction=vertical<CR>", {
+  desc = "terminal vertical",
+})
+
+-- map("n", "<leader>tg", [[<cmd>2termexec cmd="lazygit" direction=float<cr>]], {
+--   desc = "lazygit",
+-- })
+
+map("n", "<leader>tc", [[<cmd>3TermExec cmd="codex" direction=float<CR>]], {
+  desc = "codex",
+})
+
+map("t", "<Esc><Esc>", [[<C-\><C-n><cmd>ToggleTerm<CR>]], {
+  desc = "toggle terminal",
+})
+
