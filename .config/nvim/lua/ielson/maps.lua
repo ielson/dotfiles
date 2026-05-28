@@ -143,3 +143,36 @@ map("t", "<Esc><Esc>", [[<C-\><C-n><cmd>ToggleTerm<CR>]], {
   desc = "toggle terminal",
 })
 
+-- ruby/rubocop linter functions
+local function rubocop_current_file(args)
+  local file = vim.fn.expand("%:p")
+
+  if file == "" then
+    vim.notify("No file to run RuboCop on", vim.log.levels.WARN)
+    return
+  end
+
+  if vim.bo.filetype ~= "ruby" and vim.bo.filetype ~= "eruby" then
+    vim.notify("Current file is not a Ruby file", vim.log.levels.WARN)
+    return
+  end
+
+  -- Salva antes de rodar o RuboCop
+  vim.cmd("write")
+
+  local escaped_file = vim.fn.shellescape(file)
+
+  -- Usa o RuboCop do projeto, se houver Bundler/Gemfile
+  local command = "bundle exec rubocop " .. args .. " " .. escaped_file
+
+  vim.cmd("!" .. command)
+end
+
+map("n", "<leader>rl", function()
+  rubocop_current_file("")
+end, { desc = "Ruby: lint current file with RuboCop" })
+
+map("n", "<leader>ra", function()
+  rubocop_current_file("-a")
+  vim.cmd("edit")
+end, { desc = "Ruby: autocorrect current file with RuboCop" })
