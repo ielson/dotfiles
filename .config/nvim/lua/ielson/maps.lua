@@ -135,8 +135,12 @@ map("n", "<leader>tv", "<cmd>1ToggleTerm size=80 direction=vertical<CR>", {
 --   desc = "lazygit",
 -- })
 
-map("n", "<leader>tc", [[<cmd>3TermExec cmd="codex" direction=float<CR>]], {
-  desc = "codex",
+map("n", "<leader>tgn", [[<cmd>3TermExec cmd="gemini" direction=float<CR>]], {
+  desc = "gemini",
+})
+
+map("n", "<leader>tgr", [[<cmd>3TermExec cmd="gemini --resume latest" direction=float<CR>]], {
+  desc = "gemini resume latest",
 })
 
 map("t", "<Esc><Esc>", [[<C-\><C-n><cmd>ToggleTerm<CR>]], {
@@ -176,3 +180,28 @@ map("n", "<leader>ra", function()
   rubocop_current_file("-a")
   vim.cmd("edit")
 end, { desc = "Ruby: autocorrect current file with RuboCop" })
+
+-- octo.nvim commands (github review)
+map("n", "<leader>oi", "<cmd>Octo issue list<cr>", {
+    desc = "List GitHub issues", 
+})
+
+map("n", "<leader>op", "<cmd>Octo pr list<cr>", {
+    desc = "List GitHub issues", 
+})
+
+map("n", "<leader>od", "<cmd>Octo discussion list<cr>", {
+    desc = "List GitHub issues", 
+})
+
+map("n", "<leader>os", function()
+  require("octo.utils").create_base_search_command({
+    include_current_repo = true,
+  })
+end, {
+  desc = "Search GitHub",
+})
+
+map("n", "<leader>on", "<cmd>Octo notification list<cr>", {
+  desc = "List GitHub Notifications",
+})
