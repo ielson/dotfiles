@@ -4,6 +4,9 @@ vim.g.mapleader = " "
 -- keymaps, seguem o seguinte: modo, atalho, ação, tabela de opções
 local map = vim.keymap.set
 
+-- opens file explorer
+map("n", "<leader>ex", vim.cmd.Ex)
+
 -- mostrar diagnóstico em float
 map("n", "<leader>e", vim.diagnostic.open_float, { desc = "Mostrar erro/warning" })
 
@@ -205,3 +208,6 @@ end, {
 map("n", "<leader>on", "<cmd>Octo notification list<cr>", {
   desc = "List GitHub Notifications",
 })
+
+-- markdown preview
+map("n", "<leader>md", "<CMD>MarkdownPreviewToggle<CR>", { desc = "Toggle Markdown Preview" })
