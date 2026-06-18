@@ -3,7 +3,8 @@ return {
   -- LSP base
   {
     "neovim/nvim-lspconfig",
-    event = "BufReadPre",
+    -- starts the lsp for new or already existing files
+    event = {"BufReadPre", "BufNewFile"},
     config = function()
 
       -- Capacidades para integrar com nvim-cmp (se instalado)
@@ -61,6 +62,31 @@ return {
      -- cmd = {},
     })
     vim.lsp.enable("omnisharp")
+
+
+    vim.lsp.config("solargraph", {
+  capabilities = capabilities,
+
+  cmd = { "solargraph", "stdio" },
+
+  filetypes = { "ruby", "eruby" },
+
+  root_markers = {
+    "Gemfile",
+    ".solargraph.yml",
+    ".git",
+    ".autoproj",
+  },
+
+  settings = {
+    solargraph = {
+      diagnostics = true,
+      completion = true,
+    },
+  },
+})
+
+vim.lsp.enable("solargraph")
     end,
   }
 }
